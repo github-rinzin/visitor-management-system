@@ -1,7 +1,6 @@
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
-
 <table id="visitor-table" class="table table-bordered table-sm">
     <thead>
         <tr>
