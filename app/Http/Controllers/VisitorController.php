@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 
 function generateToken(){
-    return "PMUS-" .(string)(hrtime()[1]);
+    return "PM-" .(string)(hrtime()[1]);
 }
 class VisitorController extends Controller
 {
@@ -30,7 +30,7 @@ class VisitorController extends Controller
      */
     public function create()
     {
-        //
+        return view('visitor.create');
     }
 
     /**
@@ -46,8 +46,11 @@ class VisitorController extends Controller
         $visitor->name = $request->name;
         $visitor->phone = $request->phone;
         $visitor->check_in_out = false;
-
-        $visitor->head_count = $request->head_count;
+        
+        $head_count = $request->head_count;
+        if($head_count < 1 || $head_count == null) $head_count = 1; 
+        $visitor->head_count = $head_count;
+        
         // 1. Generate token
         $token = generateToken();
         // 2. Save the token
@@ -80,7 +83,7 @@ class VisitorController extends Controller
      */
     public function edit(Visitor $visitor)
     {
-        //
+        return view("visitor.edit");
     }
 
     /**

@@ -20,7 +20,7 @@
                 <td>{{ $visitor->phone }}</td>
                 <td>{{ $visitor->token }}</td>
                 <td>{{ $visitor->head_count }}</td>
-                <td><button class="btn btn-sm btn-success">Check In</button></td>
+                <td><button class="btn btn-sm btn-success">Check Out</button></td>
             </tr>
         @endforeach
     </tbody>
