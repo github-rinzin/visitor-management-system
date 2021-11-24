@@ -11,6 +11,9 @@ function generateToken(){
 }
 class VisitorController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +22,7 @@ class VisitorController extends Controller
     public function index()
     {
         // $visitor = new Visitor;
-        $visitors = Visitor::get()->all();
+        $visitors = Visitor::whereDate('created_at', date('Y-m-d'))->get();
         return view('visitor.index',['visitors' => $visitors]);
     }
 
@@ -55,11 +58,25 @@ class VisitorController extends Controller
         $token = generateToken();
         // 2. Save the token
         $visitor->token = $token;
-        // $visitor->token = "POWMUS-20211121";
         // 3. SMS the token to user
+        $basic  = new \Vonage\Client\Credentials\Basic(env('SMS_API_KEY'), env('SMS_API_SECRET'));
+        $client = new \Vonage\Client($basic);
 
+        // $response = $client->sms()->send(
+        //     new \Vonage\SMS\Message\SMS("97517418360", "BPC Power Museum VMS", "You have been checked in with token nuumber ".$token)
+        // );
+        
+        // $message = $response->current();
+        
+        // if ($message->getStatus() == 0) {
+        //     echo "The message was sent successfully\n";
+        // } else {
+        //     echo "The message failed with status: " . $message->getStatus() . "\n";
+        // }
+
+        // 4. save the user
         $visitor->save();
-        // dd($visitor);
+        // 5. done
         return redirect()->back()->with('msg', "User successfully checked out with token nuumber ".$token);
 
     }

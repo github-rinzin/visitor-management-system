@@ -32,11 +32,21 @@
     <!-- datatable-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <style>
+        .btn-success, .bg-success{
+            background-color: #26a042;
+        }
+        .btn-success:hover {
+            background-color: white;
+            color: #26a042;
+        }
+        
+    </style>
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm bg-success">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color:#26a042;">
             <div class="container">
                 <a class="navbar-brand text-light" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -49,11 +59,6 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <!-- <ul class="navbar-nav mr-auto">
-
-                    </ul> -->
-
-                    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a href="{{ route('visitors.index') }}" class="nav-link text-light">Daily Visitor</a>
@@ -62,9 +67,11 @@
                             <a href="{{ route('visitors.create') }}" class="nav-link text-light">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('visitors.create') }}" class="nav-link text-light">Report</a>
+                            <a href="{{ route('reports.index') }}" class="nav-link text-light">Report</a>
                         </li>
                     </ul>
+
+                    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid mt-4">
     @include('components.session')
     <div class="row">
         <div class="col col-md-10 shadow p-4 mx-auto rounded-sm">
