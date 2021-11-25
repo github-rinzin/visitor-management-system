@@ -15,5 +15,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/datatable',[App\Http\Controllers\DatatableController::class, 'getReport'])->name('getreport');
 Route::resource('visitors', 'App\Http\Controllers\VisitorController');
 Route::resource('reports', 'App\Http\Controllers\ReportController');
+Route::resource('checkouts', 'App\Http\Controllers\CheckoutController');
