@@ -48,7 +48,7 @@ class VisitorController extends Controller
         $visitor->id_number = $request->id_number;
         $visitor->name = $request->name;
         $visitor->phone = $request->phone;
-        $visitor->check_in_out = false;
+        $visitor->checked_out = false;
         
         $head_count = $request->head_count;
         if($head_count < 1 || $head_count == null) $head_count = 1; 
@@ -62,17 +62,17 @@ class VisitorController extends Controller
         $basic  = new \Vonage\Client\Credentials\Basic(env('SMS_API_KEY'), env('SMS_API_SECRET'));
         $client = new \Vonage\Client($basic);
 
-        // $response = $client->sms()->send(
-        //     new \Vonage\SMS\Message\SMS("97517418360", "BPC Power Museum VMS", "You have been checked in with token nuumber ".$token)
-        // );
+        $response = $client->sms()->send(
+            new \Vonage\SMS\Message\SMS("97517418360", "BPC Power Museum VMS", "You have been checked in with token nuumber ".$token)
+        );
         
-        // $message = $response->current();
+        $message = $response->current();
         
-        // if ($message->getStatus() == 0) {
-        //     echo "The message was sent successfully\n";
-        // } else {
-        //     echo "The message failed with status: " . $message->getStatus() . "\n";
-        // }
+        if ($message->getStatus() == 0) {
+            echo "The message was sent successfully\n";
+        } else {
+            echo "The message failed with status: " . $message->getStatus() . "\n";
+        }
 
         // 4. save the user
         $visitor->save();

@@ -18,7 +18,7 @@ class CheckoutController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
+     *  qA1S
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -35,9 +35,16 @@ class CheckoutController extends Controller
     public function store(Request $request)
     {
         $visitor = Visitor::where('token',$request->token)->first();
-        $visitor->check_in_out = true;
-        $visitor->save();
-        return redirect()->back()->with('msg',"User checked out");
+        if($visitor != null){
+            if($visitor->checked_out){
+                return redirect()->back()->with('warning',"Visitor with token number ".$request->token." alredy checked out");
+            }
+            $visitor->checked_out = true;
+            $visitor->save();
+            return redirect()->back()->with('msg' ,"Visitor with token number ".$request->token." successfully checked out");
+        }
+        return redirect()->back()->with('error',"Please check your token number");
+
     }
 
     /**

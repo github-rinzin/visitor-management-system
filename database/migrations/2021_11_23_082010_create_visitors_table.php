@@ -21,7 +21,7 @@ class CreateVisitorsTable extends Migration
             $table->string("phone");
             $table->biginteger("head_count");
             $table->string("token");
-            $table->boolean("check_in_out")->defalut(true);
+            $table->boolean("checked_out")->defalut(false);
         });
     }
 

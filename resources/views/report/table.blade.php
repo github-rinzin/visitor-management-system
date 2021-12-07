@@ -1,15 +1,18 @@
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
-
-<table id="report-table" class="table table-bordered table-sm">
+<button id="clear" class="btn btn-sm btn-clear mb-3 ml-auto">Clear report</button>
+<table id="report-table" class="table table-bordered table-sm table-hover table-responsive-md">
     <thead>
         <tr class="text-green">
+            <th scope="col">Token</th>
             <th scope="col">Cid/Passport/Registation Number</th>
             <th scope="col">Full Name</th>
             <th scope="col">Phone</th>
-            <th scope="col">Token</th>
             <th scope="col">Head Count</th>
-            <!-- <th scope="col">Date of Visit</th> -->
+            <th scope="col">Check in Date</th>
+            <th scope="col">Check out Date</th>
+
+            <!-- <th scope="col">checked out</th> -->
         </tr>
     </thead>
     <tbody>
@@ -41,12 +44,23 @@
         border-radius: 0.25rem;
         transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
-    .dt-button:hover{
+    .btn-clear {
+        color: #38c172 ;
+        border-color: #38c172;
+    }
+    .btn-clear:hover {
+        color: white ;
+        background-color: #38c172;
+        border-color: #38c172;
+    }
+    .dt-button:hover {
         opacity: 0.5;
     }
+
     .paginate_button:hover {
-        background-color:white;
+        background-color: white;
     }
+
     .buttons-copy {
         color: white;
         background-color: #ffed4a;
@@ -76,6 +90,7 @@
         background-color: #9561e2;
         border-color: #9561e2;
     }
+
     .text-green {
         color: #38c172;
     }
@@ -83,7 +98,10 @@
 </style>
 <script>
     $(document).ready(() => {
-
+        $('#clear').on('click', () => {
+            $("#report-table").DataTable().destroy();
+            $("#report-table > tbody"). empty();
+        });
         $('#get-report-btn').click((e) => {
             e.preventDefault();
             console.log($('#start_date').val());
@@ -99,7 +117,12 @@
                         'end_date': $('#end_date').val()
                     }
                 },
-                columns: [{
+                columns: [
+                    {
+                        data: 'token',
+                        name: 'token'
+                    },
+                    {
                         data: 'id_number',
                         name: 'id_number'
                     },
@@ -112,14 +135,17 @@
                         name: 'phone'
                     },
                     {
-                        data: 'token',
-                        name: 'token'
-                    },
-                    {
                         data: 'head_count',
                         name: 'head_count'
                     },
-                    // {date: 'created_at', name: 'created_at'},
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'updated_at',
+                        name: 'updated_at'
+                    }
                 ],
                 dom: 'Bfrtip',
                 buttons: [
