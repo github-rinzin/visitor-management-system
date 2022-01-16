@@ -1,4 +1,4 @@
-name: Laravel
+name: Up and Running
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  laravel-tests:
+  start-server:
 
     runs-on: ubuntu-latest
 
@@ -28,3 +28,5 @@ jobs:
       run: |
         mkdir -p database
         touch database/database.sqlite
+    - name: Run server
+    - run: php artisan serve
