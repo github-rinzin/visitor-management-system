@@ -29,4 +29,4 @@ jobs:
         mkdir -p database
         touch database/database.sqlite
     - name: Run server
-    - run: php artisan serve
+      run: php artisan serve
